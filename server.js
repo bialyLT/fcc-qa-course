@@ -21,7 +21,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 //Index page (static HTML)
 app.route('/')
-  .get(function (req, res) {
+  .get((req, res) => {
     res.sendFile(process.cwd() + '/views/index.html');
   });
 
@@ -32,7 +32,7 @@ fccTestingRoutes(app);
 apiRoutes(app);  
     
 //404 Not Found Middleware
-app.use(function(req, res, next) {
+app.use((req, res, next) => {
   res.status(404)
     .type('text')
     .send('Not Found');
@@ -41,11 +41,11 @@ app.use(function(req, res, next) {
 const port = process.env.PORT || 3000;
 
 //Start our server and tests!
-app.listen(port, function () {
+app.listen(port, () => {
   console.log("Listening on port " + port);
   if(process.env.NODE_ENV==='test') {
     console.log('Running Tests...');
-    setTimeout(function () {
+    setTimeout(() => {
       try {
         runner.run();
       } catch(e) {
